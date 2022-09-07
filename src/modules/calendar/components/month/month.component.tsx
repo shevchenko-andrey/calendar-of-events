@@ -1,4 +1,9 @@
-import { startOfWeek, endOfWeek, eachWeekOfInterval } from "date-fns";
+import {
+  startOfWeek,
+  endOfWeek,
+  eachWeekOfInterval,
+  formatISO,
+} from "date-fns";
 import { useEffect, useState } from "react";
 import { WeekComponent } from "../week";
 import * as Styled from "./month.styled";
@@ -31,6 +36,7 @@ export const MonthComponent = ({
       {months.map((date) => {
         return (
           <WeekComponent
+            key={formatISO(date)}
             selected={selected}
             setSelected={setSelected}
             endOfWeek={endOfWeek(date)}

@@ -7,6 +7,7 @@ interface ITdProps {
 }
 
 export const Day = styled.td<ITdProps>`
+  cursor: pointer;
   border-width: 1px;
   border-style: solid;
   border-color: ${({ theme }) => theme.COLORS.secondary};
@@ -20,11 +21,16 @@ export const Day = styled.td<ITdProps>`
 
   background-color: ${({ isSelected, theme }) =>
     isSelected ? theme.COLORS.blue : "inherit"};
+  :hover,
+  :focus {
+    background-color: ${({ theme }) => theme.COLORS.blue};
+  }
 `;
 
 export const Wrapper = styled.div`
   display: flex;
   align-items: flex-start;
+
   min-height: 4rem;
   padding: ${({ theme }) => theme.SPACES.s};
 

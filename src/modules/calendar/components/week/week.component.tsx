@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { eachDayOfInterval } from "date-fns";
+import { eachDayOfInterval, formatISO } from "date-fns";
 import { DayComponent } from "../day/day.component";
 import { IDay } from "../../../common/types/day.types";
 import * as Styled from "./week.styled";
@@ -53,7 +53,7 @@ export const WeekComponent = ({
           dayOfTheWeek,
         }) => (
           <DayComponent
-            key={`${Math.random() + dayNumber}`}
+            key={formatISO(date)}
             date={date}
             isSelected={isSelected}
             setSelected={setSelected}
