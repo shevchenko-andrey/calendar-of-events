@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { addMonths, subMonths, parse } from "date-fns";
 import CalendarContainer from "../calendar";
 import { MonthSelectorComponent } from "../calendar/components/month-selector";
@@ -12,7 +12,13 @@ import { DatePickerComponent } from "../calendar/components/datapicker";
 
 const HomeContainer = () => {
   const [modalIsOpen, setModalIsOpen] = useState(false);
-  const [selected, setSelected] = useState<Date>(new Date());
+  const [selected, setSelected] = useState<Date>(
+    localStorageService.getFilterDate() ?? new Date()
+  );
+
+  useEffect(() => {
+    localStorageService.setFilterDate(selected);
+  }, [selected]);
 
   const handleSubmitForm = (values: IEvent) => {
     localStorageService.setEvents(values);

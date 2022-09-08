@@ -1,13 +1,14 @@
 import { IEvent } from "../types/event.types";
+import { APP_KEYS } from "../consts";
 import { nanoid } from "nanoid";
-import { format } from "date-fns";
+import { format, parse } from "date-fns";
 
 class LocalStoregeService {
   setEvents(event: IEvent) {
     const oldEvents = this.getEvents();
 
     window.localStorage.setItem(
-      "events",
+      APP_KEYS.STORAGE_KEYS.EVENTS,
       JSON.stringify([...oldEvents, { ...event, id: nanoid() }])
     );
   }
@@ -31,7 +32,10 @@ class LocalStoregeService {
   }
 
   setAllEvents(events: IEvent[]) {
-    window.localStorage.setItem("events", JSON.stringify(events));
+    window.localStorage.setItem(
+      APP_KEYS.STORAGE_KEYS.EVENTS,
+      JSON.stringify(events)
+    );
   }
 
   getById(id: string) {
@@ -39,7 +43,26 @@ class LocalStoregeService {
   }
 
   getEvents(): IEvent[] {
-    return JSON.parse(window.localStorage.getItem("events") ?? "[]");
+    return JSON.parse(
+      window.localStorage.getItem(APP_KEYS.STORAGE_KEYS.EVENTS) ?? "[]"
+    );
+  }
+
+  setFilterDate(date: Date) {
+    window.localStorage.setItem(
+      APP_KEYS.STORAGE_KEYS.DATE,
+      format(date, "yyyy-MM-dd")
+    );
+  }
+
+  getFilterDate() {
+    try {
+      const date = window.localStorage.getItem(APP_KEYS.STORAGE_KEYS.DATE);
+      const result = date ? parse(date, "yyyy-MM-dd", new Date()) : null;
+      return result;
+    } catch (error) {
+      return null;
+    }
   }
 }
 export default new LocalStoregeService();
