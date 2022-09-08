@@ -3,6 +3,7 @@ import {
   endOfWeek,
   eachWeekOfInterval,
   formatISO,
+  addWeeks,
 } from "date-fns";
 import { useEffect, useState } from "react";
 import { WeekComponent } from "../week";
@@ -25,7 +26,7 @@ export const MonthComponent = ({
   useEffect(() => {
     const newMonths = eachWeekOfInterval({
       start: startOfMonth,
-      end: endOfMonth,
+      end: addWeeks(startOfMonth, 5),
     });
 
     setMonths(newMonths);

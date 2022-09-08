@@ -1,5 +1,6 @@
 import { useState } from "react";
 import { ModalComponent } from "../../../common/components/modal";
+import { ICON_SIZES } from "../../../common/consts/app-keys.const";
 import localStorageService from "../../../common/services/local-storage.service";
 import { IEvent } from "../../../common/types/event.types";
 import { EventFormComponent } from "../../../home/components/event-form";
@@ -43,7 +44,7 @@ export const EventComponent = ({ title, id, setEvents }: IEventProps) => {
           initialValues={localStorageService.getById(id)}
         >
           <Styled.Button onClick={onDelete}>
-            <Styled.IconDelete size={30} />
+            <Styled.IconDelete size={ICON_SIZES.SIZE_30} />
           </Styled.Button>
         </EventFormComponent>
       </ModalComponent>

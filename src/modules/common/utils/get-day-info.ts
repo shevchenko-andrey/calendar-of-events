@@ -1,5 +1,6 @@
 import { IDay } from "../types/day.types";
 import { format, isSameDay, isToday, isWithinInterval } from "date-fns";
+import { DATE_FNS_PATTERNS } from "../consts/app-keys.const";
 
 interface IGetdayInfoProps {
   date: Date;
@@ -21,8 +22,8 @@ export const getDayInfo = ({
 
   const day: IDay = {
     date,
-    dayNumber: format(date, "dd"),
-    dayOfTheWeek: format(date, "cccccc"),
+    dayNumber: format(date, DATE_FNS_PATTERNS.DAY_NUMBER),
+    dayOfTheWeek: format(date, DATE_FNS_PATTERNS.DAY_OF_THE_WEEK),
     setSelected,
     isSelected,
     isCurrent: isToday(date),

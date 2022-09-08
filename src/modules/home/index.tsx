@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { addMonths, subMonths, parse } from "date-fns";
+import { addMonths, subMonths, parse, format } from "date-fns";
 import CalendarContainer from "../calendar";
 import { MonthSelectorComponent } from "../calendar/components/month-selector";
 import { AddButtonComponent } from "../common/components/add-button";
@@ -9,6 +9,8 @@ import { EventFormComponent } from "./components/event-form";
 import { IEvent } from "../common/types/event.types";
 import localStorageService from "../common/services/local-storage.service";
 import { DatePickerComponent } from "../calendar/components/datapicker";
+import { eventInitialState } from "../common/consts/initial-states";
+import { DATE_FNS_PATTERNS, ICON_SIZES } from "../common/consts/app-keys.const";
 
 const HomeContainer = () => {
   const [modalIsOpen, setModalIsOpen] = useState(false);
@@ -25,7 +27,7 @@ const HomeContainer = () => {
     setModalIsOpen((prev) => !prev);
   };
 
-  const handleAddEvent = () => {
+  const handleToggleModal = () => {
     setModalIsOpen((prev) => !prev);
   };
 
@@ -45,10 +47,13 @@ const HomeContainer = () => {
   return (
     <Styled.Home>
       <Styled.Menu>
-        <AddButtonComponent onClick={handleAddEvent} size={30} />
+        <AddButtonComponent
+          onClick={handleToggleModal}
+          size={ICON_SIZES.SIZE_30}
+        />
         <Styled.DatePickerWrapper>
           <MonthSelectorComponent
-            iconSizes={30}
+            iconSizes={ICON_SIZES.SIZE_30}
             handlePrevMonth={handlePrevMonth}
             handleNextMonth={handleNextMonth}
             date={selected}
@@ -59,10 +64,16 @@ const HomeContainer = () => {
       <CalendarContainer selected={selected} setSelected={setSelected} />
       <ModalComponent
         isOpen={modalIsOpen}
-        onRequestClose={() => setModalIsOpen(false)}
+        onRequestClose={handleToggleModal}
         ariaHideApp={false}
       >
-        <EventFormComponent onSubmit={handleSubmitForm} />
+        <EventFormComponent
+          initialValues={{
+            ...eventInitialState,
+            date: format(selected, DATE_FNS_PATTERNS.SEPARATED_DASHES),
+          }}
+          onSubmit={handleSubmitForm}
+        />
       </ModalComponent>
     </Styled.Home>
   );

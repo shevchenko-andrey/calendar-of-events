@@ -40,7 +40,7 @@ export const DayComponent = ({
 
           <Styled.DayOfTheWeek>{dayOfTheWeek}</Styled.DayOfTheWeek>
         </Styled.DateWrapper>
-        {events.map(({ title, id = " " }) => (
+        {events.map(({ title, id = "" }) => (
           <EventComponent
             setEvents={setEvents}
             key={id}

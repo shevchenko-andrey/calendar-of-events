@@ -4,6 +4,8 @@ import * as Yup from "yup";
 import { InputComponent } from "../../../common/components/input";
 import { IEvent } from "../../../common/types/event.types";
 import * as Styled from "./event-form.styled";
+import { eventInitialState } from "../../../common/consts/initial-states";
+import { DATE_FNS_PATTERNS } from "../../../common/consts/app-keys.const";
 
 interface IEventFormProps {
   initialValues?: IEvent;
@@ -11,24 +13,20 @@ interface IEventFormProps {
   children?: JSX.Element;
 }
 
-const initialState = {
-  title: "",
-  description: "",
-  date: format(new Date(), "yyyy-MM-dd"),
-  time: "",
-};
-
 const validationsShema = Yup.object({
   title: Yup.string().min(2).max(10).required(),
   description: Yup.string().min(10).max(20),
   date: Yup.date()
-    .min(format(new Date(), "yyyy-MM-dd"), "you can't plan for the past")
+    .min(
+      format(new Date(), DATE_FNS_PATTERNS.SEPARATED_DASHES),
+      "you can't plan for the past"
+    )
     .required(),
   time: Yup.string(),
 });
 
 export const EventFormComponent = ({
-  initialValues = initialState,
+  initialValues = eventInitialState,
   onSubmit,
   children,
 }: IEventFormProps) => {
