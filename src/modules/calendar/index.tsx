@@ -3,13 +3,11 @@ import { startOfMonth, endOfMonth } from "date-fns";
 import * as Styled from "./calendar.styled";
 
 interface ICalendarProps {
-  date: Date;
-  selected: Date | null;
+  selected: Date;
   setSelected: (date: Date) => void;
 }
 
 export default function CalendarContainer({
-  date,
   selected,
   setSelected,
 }: ICalendarProps) {
@@ -18,8 +16,8 @@ export default function CalendarContainer({
       <MonthComponent
         selected={selected}
         setSelected={setSelected}
-        startOfMonth={startOfMonth(date)}
-        endOfMonth={endOfMonth(date)}
+        startOfMonth={startOfMonth(selected)}
+        endOfMonth={endOfMonth(selected)}
       />
     </Styled.Table>
   );

@@ -8,6 +8,8 @@ interface ITdProps {
 
 export const Day = styled.td<ITdProps>`
   cursor: pointer;
+
+  overflow: auto;
   border-width: 1px;
   border-style: solid;
   border-color: ${({ theme }) => theme.COLORS.secondary};
@@ -26,18 +28,20 @@ export const Day = styled.td<ITdProps>`
     background-color: ${({ theme }) => theme.COLORS.blue};
   }
 `;
-
-export const Wrapper = styled.div`
+export const DateWrapper = styled.div`
   display: flex;
-  align-items: flex-start;
-
-  min-height: 4rem;
   padding: ${({ theme }) => theme.SPACES.s};
 
   justify-content: space-between;
+`;
+
+export const Wrapper = styled.div`
+  max-height: 5rem;
+  margin-left: ${({ theme }) => theme.SPACES.s};
+  margin-right: ${({ theme }) => theme.SPACES.s};
 
   @media screen and (min-width: 768px) {
-    min-height: 8rem;
+    min-height: 10rem;
   }
 `;
 

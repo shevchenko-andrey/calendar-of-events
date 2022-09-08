@@ -1,49 +1,62 @@
 import { useState } from "react";
-import { addMonths, subMonths } from "date-fns";
+import { addMonths, subMonths, parse } from "date-fns";
 import CalendarContainer from "../calendar";
 import { MonthSelectorComponent } from "../calendar/components/month-selector";
 import { AddButtonComponent } from "../common/components/add-button";
 import * as Styled from "./home.styled";
 import { ModalComponent } from "../common/components/modal";
+import { EventFormComponent } from "./components/event-form";
+import { IEvent } from "../common/types/event.types";
+import localStorageService from "../common/services/local-storage.service";
+import { DatePickerComponent } from "../calendar/components/datapicker";
 
 const HomeContainer = () => {
-  const [date, setDate] = useState(new Date());
   const [modalIsOpen, setModalIsOpen] = useState(false);
   const [selected, setSelected] = useState<Date>(new Date());
+
+  const handleSubmitForm = (values: IEvent) => {
+    localStorageService.setEvents(values);
+    setModalIsOpen((prev) => !prev);
+  };
 
   const handleAddEvent = () => {
     setModalIsOpen((prev) => !prev);
   };
 
   const handlePrevMonth = () => {
-    setDate(subMonths(date, 1));
+    setSelected(subMonths(selected, 1));
   };
 
   const handleNextMonth = () => {
-    setDate(addMonths(date, 1));
+    setSelected(addMonths(selected, 1));
+  };
+
+  const onPicked = (date: string) => {
+    const newDate = parse(date, "yyyy-MM-dd", new Date());
+    setSelected(newDate);
   };
 
   return (
     <Styled.Home>
       <Styled.Menu>
         <AddButtonComponent onClick={handleAddEvent} size={30} />
-        <MonthSelectorComponent
-          iconSizes={30}
-          handlePrevMonth={handlePrevMonth}
-          handleNextMonth={handleNextMonth}
-          date={date}
-        />
+        <Styled.DatePickerWrapper>
+          <MonthSelectorComponent
+            iconSizes={30}
+            handlePrevMonth={handlePrevMonth}
+            handleNextMonth={handleNextMonth}
+            date={selected}
+          />
+          <DatePickerComponent onPicked={onPicked} />
+        </Styled.DatePickerWrapper>
       </Styled.Menu>
-      <CalendarContainer
-        selected={selected}
-        setSelected={setSelected}
-        date={date}
-      />
+      <CalendarContainer selected={selected} setSelected={setSelected} />
       <ModalComponent
         isOpen={modalIsOpen}
         onRequestClose={() => setModalIsOpen(false)}
+        ariaHideApp={false}
       >
-        <div>Work</div>
+        <EventFormComponent onSubmit={handleSubmitForm} />
       </ModalComponent>
     </Styled.Home>
   );

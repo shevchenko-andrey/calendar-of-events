@@ -1,6 +1,5 @@
-import styled, { createGlobalStyle } from "styled-components";
+import { createGlobalStyle } from "styled-components";
 import { COLORS } from "../theme";
-
 
 // eslint-disable-next-line import/prefer-default-export
 
@@ -14,8 +13,8 @@ export const GlobalStyles = createGlobalStyle`
     box-sizing: border-box;
   }
 
-  ul[class],
-  ol[class] {
+  ul,
+  ol {
     padding: 0;
   }
 
@@ -36,6 +35,8 @@ export const GlobalStyles = createGlobalStyle`
   dl,
   dd {
     margin: 0;
+    padding: 0;
+    padding: 0;
   }
 
   body {
@@ -47,8 +48,8 @@ export const GlobalStyles = createGlobalStyle`
     background-color: ${COLORS.white};
   }
 
-  ul[class],
-  ol[class] {
+  ul,
+  ol {
     list-style: none;
     
   }

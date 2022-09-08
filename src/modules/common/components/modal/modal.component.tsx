@@ -7,10 +7,14 @@ export const ModalComponent = ({
   isOpen,
   onRequestClose,
   children,
+  ariaHideApp,
 }: ModalProps) => {
-  debugger;
   return (
-    <ReactModal onRequestClose={onRequestClose} isOpen={isOpen}>
+    <ReactModal
+      ariaHideApp={false}
+      onRequestClose={onRequestClose}
+      isOpen={isOpen}
+    >
       <Styled.ModalWrapper>
         <Styled.CloseBtn onClick={onRequestClose}>
           <Styled.CloseIcon size={30} />
