@@ -33,7 +33,9 @@ export const EventComponent = ({ title, id, setEvents }: IEventProps) => {
 
   return (
     <>
-      <Styled.Event onClick={handleModal}>{title}</Styled.Event>
+      <Styled.Event onClick={handleModal}>
+        <Styled.Title>{title}</Styled.Title>
+      </Styled.Event>
       <ModalComponent
         ariaHideApp={false}
         onRequestClose={handleModal}

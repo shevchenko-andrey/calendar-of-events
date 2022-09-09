@@ -6,7 +6,6 @@ export const Button = styled.button`
   display: flex;
   align-self: flex-end;
   margin-top: ${({ theme }) => theme.SPACES.l};
-  margin-left: ${({ theme }) => theme.SPACES.l};
   text-align: center;
   cursor: pointer;
   min-width: 5rem;

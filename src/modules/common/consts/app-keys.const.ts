@@ -13,4 +13,5 @@ export const DATE_FNS_PATTERNS = {
 
 export const ICON_SIZES = {
   SIZE_30: 30,
+  SIZE_20: 20,
 };

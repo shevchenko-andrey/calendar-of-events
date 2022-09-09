@@ -8,7 +8,7 @@ interface ITdProps {
 
 export const Day = styled.td<ITdProps>`
   cursor: pointer;
-
+  max-width: ${window.innerWidth / 20}px;
   overflow: auto;
   border-width: 1px;
   border-style: solid;
@@ -37,6 +37,7 @@ export const DateWrapper = styled.div`
 
 export const Wrapper = styled.div`
   max-height: 5rem;
+  max-width: 20rem;
   margin-left: ${({ theme }) => theme.SPACES.s};
   margin-right: ${({ theme }) => theme.SPACES.s};
 

@@ -29,12 +29,10 @@ export const DateFild = styled.input`
   max-width: 8rem;
   width: 100%;
   height: 2rem;
-  transition: border-bottom, color 0.5s cubic-bezier(0.39, 0.575, 0.565, 1);
+  transition: border-bottom 0.5s cubic-bezier(0.39, 0.575, 0.565, 1);
   :hover,
   :focus {
     border-bottom: 1px solid ${({ theme }) => theme.COLORS.blueGreen};
-
-    color: ${({ theme }) => theme.COLORS.blueGreen};
   }
 `;
 export const DateWrapper = styled.div`

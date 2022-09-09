@@ -14,8 +14,8 @@ interface IEventFormProps {
 }
 
 const validationsShema = Yup.object({
-  title: Yup.string().min(2).max(10).required(),
-  description: Yup.string().min(10).max(20),
+  title: Yup.string().min(2).max(30).required(),
+  description: Yup.string().min(10).max(100),
   date: Yup.date()
     .min(
       format(new Date(), DATE_FNS_PATTERNS.SEPARATED_DASHES),
@@ -52,8 +52,8 @@ export const EventFormComponent = ({
           <InputComponent name="time" title="Time" type="time" />
         </Styled.DateWrapper>
         <Styled.ButtonGroup>
-          {children}
           <Styled.Button type="submit">Save</Styled.Button>
+          {children}
         </Styled.ButtonGroup>
       </Styled.EventForm>
     </Formik>

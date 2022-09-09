@@ -58,7 +58,7 @@ const HomeContainer = () => {
             handleNextMonth={handleNextMonth}
             date={selected}
           />
-          <DatePickerComponent onPicked={onPicked} />
+          <DatePickerComponent size={ICON_SIZES.SIZE_30} onPicked={onPicked} />
         </Styled.DatePickerWrapper>
       </Styled.Menu>
       <CalendarContainer selected={selected} setSelected={setSelected} />
